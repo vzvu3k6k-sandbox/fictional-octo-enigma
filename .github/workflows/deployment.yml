@@ -18,7 +18,7 @@ jobs:
           token: "${{ github.token }}"
           environment: staging
       - name: Update deployment status
-        uses: chrnorm/deployment-status@4387b2811a766440ce9fdf0acc88c2e82f594476
+        uses: chrnorm/deployment-status@master
         with:
           token: "${{ github.token }}"
           target_url: https://example.com/
