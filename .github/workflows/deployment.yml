@@ -22,6 +22,6 @@ jobs:
         with:
           token: "${{ github.token }}"
           target_url: https://example.com/
-          log_url: ""
+          log_url: null
           state: "success"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
