@@ -24,7 +24,7 @@ jobs:
       - name: Create GitHub deployment status
         uses: octokit/request-action@v2.x
         with:
-          route: POST /repos/vzvu3k6k-sandbox/fictional-octo-enigma/deployments/{deployment_id}
+          route: POST /repos/vzvu3k6k-sandbox/fictional-octo-enigma/deployments/{deployment_id}/statuses
           deployment_id: ${{ fromJson(steps.deployment.outputs.data).id }}
           state: success
           target_url: https://example.com/
