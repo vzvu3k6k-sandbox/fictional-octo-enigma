@@ -18,7 +18,7 @@ jobs:
           route: POST /repos/vzvu3k6k-sandbox/fictional-octo-enigma/deployments
           ref: ${{ github.sha }}
           environment: staging
-          required_contexts: []
+          required_contexts: "[]"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create GitHub deployment status
