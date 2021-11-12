@@ -1,0 +1,27 @@
+name: Inactive deployments
+
+on:
+  pull_request:
+    types: [synchronize]
+
+jobs:
+  inactive_deployments:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v5
+        with:
+          script: |
+            const { data: deployments } = await github.rest.repos.listDeployments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: originalRef,
+            });
+            console.log(deployments);
+            for (const d of deployments) {
+              github.rest.repos.createDeploymentStatus({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                deployment_id: d.id,
+                state: "inactive",
+              });
+            }
