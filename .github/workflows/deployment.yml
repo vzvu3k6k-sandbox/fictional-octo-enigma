@@ -10,16 +10,24 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - uses: chrnorm/deployment-action@releases/v1
-        name: Create GitHub deployment
+
+      - name: Create GitHub deployment
         id: deployment
+        uses: octokit/request-action@v2.x
         with:
-          token: "${{ github.token }}"
+          route: POST /repos/vzvu3k6k-sandbox/fictional-octo-enigma/deployments
+          ref: ${{ github.ref }}
           environment: staging
-      - name: Update deployment status
-        uses: chrnorm/deployment-status@releases/v1
+          required_contexts: "[]"
+          transient_environment: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create GitHub deployment status
+        uses: octokit/request-action@v2.x
         with:
-          token: "${{ github.token }}"
+          route: POST /repos/vzvu3k6k-sandbox/fictional-octo-enigma/deployments/{deployment_id}/statuses
+          deployment_id: ${{ fromJson(steps.deployment.outputs.data).id }}
+          state: success
           target_url: https://example.com/
-          state: "success"
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
