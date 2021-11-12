@@ -14,10 +14,8 @@ jobs:
             const { data: deployments } = await github.rest.repos.listDeployments({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: context.ref,
+              ref: context.ref.replace(/\/merge$/, ""),
             });
-            console.log(context.ref);
-            console.log(deployments);
             for (const d of deployments) {
               github.rest.repos.createDeploymentStatus({
                 owner: context.repo.owner,
