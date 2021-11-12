@@ -19,6 +19,7 @@ jobs:
           ref: ${{ github.sha }}
           environment: staging
           required_contexts: "[]"
+          auto_inactive: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create GitHub deployment status
