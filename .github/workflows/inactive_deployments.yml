@@ -8,6 +8,12 @@ jobs:
   inactive_deployments:
     runs-on: ubuntu-latest
     steps:
+      - run: |
+          echo "head_ref: $HEAD_REF"
+          echo "ref: $REF"
+        env:
+          HEAD_REF: ${{ github.head_ref	}}
+          REF: ${{ github.ref }}
       - uses: actions/github-script@v5
         with:
           script: |
