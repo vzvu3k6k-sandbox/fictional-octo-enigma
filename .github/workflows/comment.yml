@@ -1,0 +1,21 @@
+name: Deploy PR to preview repository
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: octokit/request-action@v2.x
+        id: create_check_run
+        with:
+          route: POST /repos/{owner}/{repo}/pulls/{pr_number}/comments
+          owner: octokit
+          repo: request-action
+          pr_number: ${{ github.event.pull_request.number }}
+          body: |
+            Pull request: #${{ github.event.pull_request.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
