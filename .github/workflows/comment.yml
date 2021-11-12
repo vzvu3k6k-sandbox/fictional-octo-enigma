@@ -11,8 +11,8 @@ jobs:
       - uses: octokit/request-action@v2.x
         with:
           route: POST /repos/{owner}/{repo}/pulls/{pr_number}/comments
-          owner: octokit
-          repo: request-action
+          owner: ${{ github.event.pull_request.repository.owner.login }}
+          repo: ${{ github.event.pull_request.repository.name }}
           pr_number: ${{ github.event.pull_request.number }}
           body: |
             Pull request: #${{ github.event.pull_request.number }}
