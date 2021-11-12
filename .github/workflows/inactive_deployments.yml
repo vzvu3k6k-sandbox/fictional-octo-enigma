@@ -11,7 +11,7 @@ jobs:
       - uses: actions/github-script@v5
         with:
           script: |
-            const deployments = github.rest.repos.listDeployments({
+            const { data: deployments } = github.rest.repos.listDeployments({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: context.ref,
