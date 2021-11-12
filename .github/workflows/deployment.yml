@@ -19,6 +19,7 @@ jobs:
           ref: ${{ github.ref }}
           environment: staging
           required_contexts: "[]"
+          transient_environment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create GitHub deployment status
@@ -26,7 +27,6 @@ jobs:
         with:
           route: POST /repos/vzvu3k6k-sandbox/fictional-octo-enigma/deployments/{deployment_id}/statuses
           deployment_id: ${{ fromJson(steps.deployment.outputs.data).id }}
-          auto_inactive: false
           state: success
           target_url: https://example.com/
         env:
