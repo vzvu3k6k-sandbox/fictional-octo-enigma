@@ -11,11 +11,14 @@ jobs:
       - uses: actions/github-script@v5
         with:
           script: |
+            const originalRef = context.ref.replace(/\/merge$/, "");
+            console.log(originalRef);
             const { data: deployments } = await github.rest.repos.listDeployments({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: context.ref.replace(/\/merge$/, ""),
+              ref: originalRef,
             });
+            console.log(deployments);
             for (const d of deployments) {
               github.rest.repos.createDeploymentStatus({
                 owner: context.repo.owner,
