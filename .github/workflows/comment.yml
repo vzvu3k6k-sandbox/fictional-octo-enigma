@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: octokit/request-action@v2.x
         with:
-          route: POST /repos/{owner}/{repo}/pulls/{pr_number}/comments
+          route: POST /repos/{owner}/{repo}/issues/{pr_number}/comments
           owner: ${{ github.event.repository.owner.login }}
           repo: ${{ github.event.repository.name }}
           pr_number: ${{ github.event.pull_request.number }}
