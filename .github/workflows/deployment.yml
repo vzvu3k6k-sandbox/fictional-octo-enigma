@@ -16,7 +16,7 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/vzvu3k6k-sandbox/fictional-octo-enigma/deployments
-          ref: ${{ github.sha }}
+          ref: ${{ github.ref }}
           environment: staging
           required_contexts: "[]"
         env:
